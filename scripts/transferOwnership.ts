@@ -27,7 +27,7 @@ export async function transferOwner(
   const l2ChainId = (await l2Provider.getNetwork()).chainId
 
   let TOKEN_BRIDGE_CREATOR
-  if (l2ChainId === 421614) {
+  if (l2ChainId === 42161) {
     TOKEN_BRIDGE_CREATOR = TOKEN_BRIDGE_CREATOR_Arb_ONE
   } else {
     throw new Error(
