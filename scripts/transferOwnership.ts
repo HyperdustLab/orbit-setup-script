@@ -5,7 +5,7 @@ import UpgradeExecutor from '@arbitrum/nitro-contracts/build/contracts/src/mocks
 import ArbOwner from '@arbitrum/nitro-contracts/build/contracts/src/precompiles/ArbOwner.sol/ArbOwner.json'
 import fs from 'fs'
 import { L3Config } from './l3ConfigType'
-import { TOKEN_BRIDGE_CREATOR_Arb_Sepolia } from './createTokenBridge'
+import {TOKEN_BRIDGE_CREATOR_Arb_ONE, TOKEN_BRIDGE_CREATOR_Arb_Sepolia} from './createTokenBridge'
 import L1AtomicTokenBridgeCreator from '@arbitrum/token-bridge-contracts/build/contracts/contracts/tokenbridge/ethereum/L1AtomicTokenBridgeCreator.sol/L1AtomicTokenBridgeCreator.json'
 
 export const getSigner = (provider: JsonRpcProvider, key?: string) => {
@@ -28,7 +28,7 @@ export async function transferOwner(
 
   let TOKEN_BRIDGE_CREATOR
   if (l2ChainId === 421614) {
-    TOKEN_BRIDGE_CREATOR = TOKEN_BRIDGE_CREATOR_Arb_Sepolia
+    TOKEN_BRIDGE_CREATOR = TOKEN_BRIDGE_CREATOR_Arb_ONE
   } else {
     throw new Error(
       'The Base Chain you have provided is not supported, please put RPC for Arb Sepolia'

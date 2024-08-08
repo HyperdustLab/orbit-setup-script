@@ -55,6 +55,9 @@ function createPublicClientFromChainInfo({
 export const TOKEN_BRIDGE_CREATOR_Arb_Sepolia =
   '0x56C486D3786fA26cc61473C499A36Eb9CC1FbD8E'
 
+export const TOKEN_BRIDGE_CREATOR_Arb_ONE =
+    '0x2f5624dc8800dfA0A82AC03509Ef8bb8E7Ac000e'
+
 async function getNativeToken({
   rollup,
   provider,
