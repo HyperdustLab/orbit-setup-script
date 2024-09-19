@@ -49,7 +49,7 @@ async function sendEthOrDepositERC20(
     if (decimals !== 18) {
       throw new Error('We currently only support 18 decimals token')
     }
-    const amount = ethers.utils.parseUnits('0.4', decimals)
+    const amount = ethers.utils.parseUnits('20', decimals)
     const tx = await erc20Inbox.depositERC20(amount)
     console.log('Transaction hash for depositERC20: ', tx.hash)
     await tx.wait()
@@ -58,7 +58,7 @@ async function sendEthOrDepositERC20(
 }
 
 export async function ethOrERC20Deposit(
-  privateKey: string,
+  privateKey: string,``
   L2_RPC_URL: string
 ) {
   if (!privateKey || !L2_RPC_URL) {
