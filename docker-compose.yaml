@@ -48,13 +48,6 @@ services:
     extends:
       file: ./docker-compose/services/frontend.yml
       service: frontend
-    environment:
-      NEXT_PUBLIC_NETWORK_NAME: "Arbitrum Local"
-      NEXT_PUBLIC_NETWORK_SHORT_NAME: "Arbitrum Local"
-      NEXT_PUBLIC_AD_BANNER_PROVIDER: "none"
-      NEXT_PUBLIC_NETWORK_RPC_URL: http://nitro:8449/
-
-
   stats-db-init:
     extends:
       file: ./docker-compose/services/stats.yml
@@ -82,16 +75,21 @@ services:
       - frontend
       - stats
     extends:
-      file: ./docker-compose/services/nginx.yml
+      file: ./docker-compose/services/nginx.yml     
       service: proxy
 
   nitro:
     image: offchainlabs/nitro-node:v2.3.3-6a1c1a7
     ports:
-      - "127.0.0.1:8449:8449"
+      - "8449:8449"
+      - "8548:8548"
     volumes:
       - "./config:/home/user/.arbitrum"
-    command: --conf.file /home/user/.arbitrum/nodeConfig.json
+    command: >
+      --conf.file /home/user/.arbitrum/nodeConfig.json
+      --ws.port=8548
+      --ws.addr=0.0.0.0
+      --ws.origins=*
 
   das-server:
     image: offchainlabs/nitro-node:v2.3.3-6a1c1a7
