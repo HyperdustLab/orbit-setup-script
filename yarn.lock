@@ -219,7 +219,7 @@
     "@openzeppelin/contracts-upgradeable" "4.5.2"
     patch-package "^6.4.7"
 
-"@arbitrum/orbit-sdk@^0.8.0":
+"@arbitrum/orbit-sdk@^0.8.3":
   version "0.8.3"
   resolved "file:node_modules/.pnpm/@arbitrum+orbit-sdk@0.8.3_viem@1.21.4_typescript@5.5.4_/node_modules/@arbitrum/orbit-sdk"
   dependencies:
@@ -13060,10 +13060,10 @@ optionator@^0.9.1, optionator@^0.9.3:
   resolved "file:"
   dependencies:
     "@arbitrum/nitro-contracts" "^1.1.1"
-    "@arbitrum/orbit-sdk" "^0.8.0"
+    "@arbitrum/orbit-sdk" "^0.8.3"
     "@arbitrum/token-bridge-contracts" "^1.2.1"
     orbit-setup-script "file:"
-    viem "^1.20.0"
+    viem "^1.21.4"
 
 os-browserify@^0.3.0:
   version "0.3.0"
@@ -16996,7 +16996,7 @@ vfile@^6.0.0:
     "@types/unist" "^3.0.0"
     vfile-message "^4.0.0"
 
-viem@^1.20.0:
+viem@^1.20.0, viem@^1.21.4:
   version "1.21.4"
   resolved "file:node_modules/.pnpm/viem@1.21.4_typescript@5.5.4/node_modules/viem"
   dependencies:
