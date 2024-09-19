@@ -58,7 +58,7 @@ async function sendEthOrDepositERC20(
 }
 
 export async function ethOrERC20Deposit(
-  privateKey: string,``
+  privateKey: string,
   L2_RPC_URL: string
 ) {
   if (!privateKey || !L2_RPC_URL) {
