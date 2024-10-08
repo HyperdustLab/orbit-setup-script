@@ -17,7 +17,8 @@ if jq -e '.node | has("data-availability")' /home/user/.arbitrum/nodeConfig.json
         --enable-rest \
         --rest-addr '0.0.0.0' \
         --log-level 5 \
-        --data-availability.local-file-storage.enable \
+        --data-availability.local-cache.enable \
+        --data-availability.local-file-storage.enable    \
         --data-availability.local-file-storage.data-dir /home/user/das-data \
         --data-availability.s3-storage.enable \
         --data-availability.s3-storage.access-key "" \
