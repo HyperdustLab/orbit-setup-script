@@ -6,6 +6,13 @@ SEQUENCER_INBOX_ADDRESS=$(jq -r '.sequencerInbox' /home/user/.arbitrum/orbitSetu
 # Read the parent-chain-node-url from the nodeConfig JSON file
 PARENT_CHAIN_NODE_URL=$(jq -r '.node."data-availability"."parent-chain-node-url"' /home/user/.arbitrum/nodeConfig.json)
 
+
+# Create keys directory and generate keys if they don't exist
+mkdir -p /home/user/.arbitrum/keys && \
+[ ! -f /home/user/.arbitrum/keys/das_bls.pub ] && datool keygen --dir /home/user/.arbitrum/keys; \
+[ ! -f /home/user/.arbitrum/keys/ecdsa.pub ] && datool keygen --dir /home/user/.arbitrum/keys --ecdsa;
+
+
 # Check if the "data-availability" key exists
 if jq -e '.node | has("data-availability")' /home/user/.arbitrum/nodeConfig.json >/dev/null; then
     # Start daserver with the new command
