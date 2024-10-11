@@ -4,13 +4,9 @@ map $http_upgrade $connection_upgrade {
   ''      close;
 }
 
-
-set $server_name_var 172.31.30.114;
-
-
 server {
     listen       8002;
-    server_name  $server_name_var;
+    server_name  ${SERVER_NAME};
     proxy_http_version 1.1;
 
     location ~ ^/(api|socket|sitemap.xml|auth/auth0|auth/auth0/callback|auth/logout) {
@@ -51,7 +47,7 @@ server {
 
 server {
     listen 8001;
-    server_name $server_name_var;
+    server_name ${SERVER_NAME};
 
     location / {
         proxy_pass http://nitro:8449/;
@@ -65,23 +61,26 @@ server {
         proxy_cache_bypass $http_upgrade;
     }
     
-    location /ws {
-        proxy_pass http://nitro:8548/;
-        proxy_http_version 1.1;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection $connection_upgrade;
-        proxy_cache_bypass $http_upgrade;
-    }
+location /ws {
+    proxy_pass http://nitro:8548/;
+    proxy_http_version 1.1;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "Upgrade";   # 将 Connection 固定为 Upgrade
+    
+    proxy_cache_bypass $http_upgrade;
+}
+
 
 }
 
 server {
     listen       8003;
-    server_name  $server_name_var;
+    server_name  ${SERVER_NAME};
     proxy_http_version 1.1;
     proxy_hide_header Access-Control-Allow-Origin;
     proxy_hide_header Access-Control-Allow-Methods;

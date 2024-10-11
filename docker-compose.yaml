@@ -28,9 +28,9 @@ services:
     links:
       - db:database
     environment:
-        ETHEREUM_JSONRPC_HTTP_URL: http://nitro:8449/
-        ETHEREUM_JSONRPC_TRACE_URL: http://nitro:8449/
-        INDEXER_DISABLE_PENDING_TRANSACTIONS_FETCHER: "true"
+      ETHEREUM_JSONRPC_HTTP_URL: http://nitro:8449/
+      ETHEREUM_JSONRPC_TRACE_URL: http://nitro:8449/
+      INDEXER_DISABLE_PENDING_TRANSACTIONS_FETCHER: 'true'
 
   visualizer:
     extends:
@@ -75,16 +75,18 @@ services:
       - frontend
       - stats
     extends:
-      file: ./docker-compose/services/nginx.yml     
+      file: ./docker-compose/services/nginx.yml
       service: proxy
-
+    environment:
+      - SERVER_NAME=172.31.34.30
   nitro:
     image: offchainlabs/nitro-node:v2.3.3-6a1c1a7
     ports:
-      - "8449:8449"
-      - "8548:8548"
+      - '8449:8449'
+      - '8548:8548'
+      - '9642:9642'
     volumes:
-      - "./config:/home/user/.arbitrum"
+      - './config:/home/user/.arbitrum'
     command: >
       --conf.file /home/user/.arbitrum/nodeConfig.json
       --ws.port=8548
@@ -93,11 +95,11 @@ services:
 
   das-server:
     image: offchainlabs/nitro-node:v2.3.3-6a1c1a7
-    entrypoint: [ "/bin/bash", "/das-server.sh" ]
+    entrypoint: ['/bin/bash', '/das-server.sh']
     volumes:
-      - "./config:/home/user/.arbitrum"
-      - "./das-server.sh:/das-server.sh"
-      - "./das-data:/home/user/das-data"
+      - './config:/home/user/.arbitrum'
+      - './das-server.sh:/das-server.sh'
+      - './das-data:/home/user/das-data'
     ports:
-      - "9876:9876"
-      - "9877:9877"
+      - '9876:9876'
+      - '9877:9877'
