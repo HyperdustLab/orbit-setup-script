@@ -105,15 +105,13 @@ services:
       - '9877:9877'
   ipfs:
     image: ipfs/go-ipfs
-    entrypoint: ['/bin/bash', '/ipfs.sh']
     container_name: ipfs
     ports:
       - '4001:4001'
       - '5001:5001'
-      - '8080:8080'
+      - '8088:8080'
     volumes:
-      - ./ipfs/data:/data/ipfs
-      - './ipfs.sh:/ipfs.sh'
+      - ./ipfs:/data/ipfs
     restart: unless-stopped
   ipfs-cluster:
     image: ipfs/ipfs-cluster:latest
@@ -121,13 +119,9 @@ services:
     environment:
       CLUSTER_SECRET: '97ee1e307938526d13782f78289421f14b07501793c2072e30fb49378fe3dfba'
     volumes:
-      - ./ipfs-cluster/data:/data/ipfs-cluster:rw
-      - ./ipfs-cluster/service.json:/data/ipfs-cluster/service.json:rw
-      - './start-ipfs-cluster.sh:/usr/local/bin/start-ipfs-cluster.sh'
-    entrypoint: /usr/local/bin/start-ipfs-cluster.sh
+      - ./ipfs-cluster:/data/ipfs-cluster
+      - ./ipfs-cluster.sh:/usr/local/bin/ipfs-cluster.sh
     ports:
       - '9094:9094'
       - '9096:9096'
-    depends_on:
-      - ipfs
     restart: unless-stopped
